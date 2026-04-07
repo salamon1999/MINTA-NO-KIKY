@@ -51,16 +51,18 @@
   50% { transform: translateY(-40px) rotate(15deg); }
 }
 
-/* Claymorphism Card (Puffy 3D Look) */
+/* Glassmorphism Card (Puffy 3D Look with Transparency) */
 .card {
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.45); /* Semi-transparent */
+  backdrop-filter: blur(20px); /* Frosted glass effect */
+  -webkit-backdrop-filter: blur(20px);
   padding: 3rem 2rem;
   border-radius: 50px;
   box-shadow: 
-    20px 20px 60px rgba(0, 0, 0, 0.05),
-    -20px -20px 60px rgba(255, 255, 255, 0.8),
-    inset 4px 4px 10px rgba(0,0,0,0.02),
-    inset -4px -4px 10px rgba(255,255,255,0.5);
+    20px 20px 60px rgba(0, 0, 0, 0.08),
+    -20px -20px 60px rgba(255, 255, 255, 0.4),
+    inset 4px 4px 10px rgba(255, 255, 255, 0.5),
+    inset -4px -4px 10px rgba(0,0,0,0.03);
   text-align: center;
   max-width: 500px;
   width: 90%;
@@ -68,7 +70,7 @@
   overflow-y: auto;
   z-index: 10;
   position: relative;
-  border: 8px solid #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.6); /* Subtle border */
 }
 
 .title {

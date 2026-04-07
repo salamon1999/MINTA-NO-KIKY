@@ -12,19 +12,32 @@ function App() {
     const padding = 30
     const buttonWidth = 140
     const buttonHeight = 70
-    
-    // Boundary check to keep button within viewport
+
+    // Get current position or default to center-ish
+    const currentLeft = typeof noButtonStyle.left === 'string' ? parseInt(noButtonStyle.left) : window.innerWidth / 2
+    const currentTop = typeof noButtonStyle.top === 'string' ? parseInt(noButtonStyle.top) : window.innerHeight / 2
+
+    // Move only 100-200px away from current position
+    const offset = 150 
+    const randomAngle = Math.random() * Math.PI * 2
+
+    let newX = currentLeft + Math.cos(randomAngle) * offset
+    let newY = currentTop + Math.sin(randomAngle) * offset
+
+    // Keep within screen bounds
     const maxX = window.innerWidth - buttonWidth - padding
     const maxY = window.innerHeight - buttonHeight - padding
-    
-    const randomX = Math.max(padding, Math.random() * maxX)
-    const randomY = Math.max(padding, Math.random() * maxY)
-    
+
+    if (newX < padding) newX = padding + offset
+    if (newX > maxX) newX = maxX - offset
+    if (newY < padding) newY = padding + offset
+    if (newY > maxY) newY = maxY - offset
+
     setNoButtonStyle({
       position: 'fixed',
-      left: `${randomX}px`,
-      top: `${randomY}px`,
-      transition: 'all 0.1s cubic-bezier(0.34, 1.56, 0.64, 1)',
+      left: `${newX}px`,
+      top: `${newY}px`,
+      transition: 'all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)',
       zIndex: 1000
     })
   }

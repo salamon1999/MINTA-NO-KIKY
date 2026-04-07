@@ -17,34 +17,40 @@ function App() {
     const buttonWidth = 140
     const buttonHeight = 70
     
-    let newX = 0
-    let newY = 0
-    let isInsideCard = true
-    
-    const maxX = window.innerWidth - buttonWidth - padding
-    const maxY = window.innerHeight - buttonHeight - padding
-
-    // Try to find a position outside the card
-    for (let i = 0; i < 50; i++) {
-      newX = Math.max(padding, Math.random() * maxX)
-      newY = Math.max(padding, Math.random() * maxY)
-
-      // Button rect
-      const btnRight = newX + buttonWidth
-      const btnBottom = newY + buttonHeight
-
-      // Check overlap with card
-      const overlaps = !(
-        btnRight < cardRect.left || 
-        newX > cardRect.right || 
-        btnBottom < cardRect.top || 
-        newY > cardRect.bottom
-      )
-
-      if (!overlaps) {
-        isInsideCard = false
-        break
+    // Define safe zones (Top, Bottom, Left, Right of the card)
+    const zones = [
+      { // Above card
+        minX: padding, maxX: window.innerWidth - buttonWidth - padding,
+        minY: padding, maxY: cardRect.top - buttonHeight - padding
+      },
+      { // Below card
+        minX: padding, maxX: window.innerWidth - buttonWidth - padding,
+        minY: cardRect.bottom + padding, maxY: window.innerHeight - buttonHeight - padding
+      },
+      { // Left of card
+        minX: padding, maxX: cardRect.left - buttonWidth - padding,
+        minY: padding, maxY: window.innerHeight - buttonHeight - padding
+      },
+      { // Right of card
+        minX: cardRect.right + padding, maxX: window.innerWidth - buttonWidth - padding,
+        minY: padding, maxY: window.innerHeight - buttonHeight - padding
       }
+    ]
+
+    // Filter zones that actually have space
+    const validZones = zones.filter(z => z.maxX > z.minX && z.maxY > z.minY)
+
+    let newX, newY
+
+    if (validZones.length > 0) {
+      // Pick a random valid zone
+      const zone = validZones[Math.floor(Math.random() * validZones.length)]
+      newX = zone.minX + Math.random() * (zone.maxX - zone.minX)
+      newY = zone.minY + Math.random() * (zone.maxY - zone.minY)
+    } else {
+      // Fallback: Just move to any random edge of the screen if card is too big
+      newX = Math.random() > 0.5 ? padding : window.innerWidth - buttonWidth - padding
+      newY = Math.random() > 0.5 ? padding : window.innerHeight - buttonHeight - padding
     }
     
     setNoButtonStyle({

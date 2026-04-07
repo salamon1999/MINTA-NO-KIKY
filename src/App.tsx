@@ -8,24 +8,22 @@ function App() {
   const containerRef = useRef<HTMLDivElement>(null)
 
   const moveButton = () => {
-    if (!containerRef.current) return
-    
-    const container = containerRef.current.getBoundingClientRect()
+    // We'll use the entire window to move the button
+    const padding = 20
     const buttonWidth = 100
     const buttonHeight = 50
     
-    // Calculate random position within container bounds
-    const maxX = container.width - buttonWidth
-    const maxY = container.height - buttonHeight
+    const maxX = window.innerWidth - buttonWidth - padding
+    const maxY = window.innerHeight - buttonHeight - padding
     
-    const randomX = Math.random() * maxX
-    const randomY = Math.random() * maxY
+    const randomX = Math.max(padding, Math.random() * maxX)
+    const randomY = Math.max(padding, Math.random() * maxY)
     
     setNoButtonStyle({
-      position: 'absolute',
+      position: 'fixed', // Use fixed to allow moving anywhere on screen
       left: `${randomX}px`,
       top: `${randomY}px`,
-      transition: 'all 0.2s ease-out'
+      transition: 'all 0.15s ease-out'
     })
   }
 

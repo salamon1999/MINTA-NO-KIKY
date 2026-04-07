@@ -93,11 +93,13 @@ function App() {
 
       {step === 'final' && (
         <div className="card fade-in">
-          <h1 className="title">Makasih banget ya! ✨</h1>
+          <h1 className="title">Makasih Kak Gemooy! ✨</h1>
           <p className="encouragement-text">
-            Semangat terus buat hari-harinya! <br />
-            Semoga segala urusanmu lancar dan bahagia selalu. <br />
-            Ditunggu chatnya ya! 💖
+            Maaf kalau kurang bagus heheh ohiye sebenarnya paska tembak ki nanti mau kasiki begini hahah tapi biar mi sekarang hahah karena kalau sekarang ku tembak ki belum pih pasti mauuki terimaka jadi biarmi nomornya dulu heheh,
+            <br /><br />
+            Dan kalau sudah mi interview di lihat ini selamat kak atas kelancaran interviewnya dan kalau blum pih, semangatki yaah semogah di perlancar segalah urusanta nanti sampai di terimaki amiin,
+            <br /><br />
+            Dan tak semua usaha itu di permudahkan tapi semua yang berusaha pasti akan berubah dan sekalilagi semnagaat kaka gemooyku yang tembem pipinya love you :)
           </p>
           <div className="heart-icon">💝</div>
         </div>
